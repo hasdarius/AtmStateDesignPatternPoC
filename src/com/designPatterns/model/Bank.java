@@ -4,6 +4,7 @@ import com.designPatterns.model.validate.CardValidator;
 
 import java.util.LinkedHashSet;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.Set;
 
 public class Bank {
@@ -11,6 +12,12 @@ public class Bank {
 
     private Bank() {
         accounts = new LinkedHashSet<>();
+    }
+
+    public void updatePin(Account account, String pin) {
+        accounts.remove(account);
+        account.setCard(new Card(account.getCard().getCardNumber(), pin));
+        accounts.add(account);
     }
 
     private static final class BankHolder {
@@ -27,10 +34,9 @@ public class Bank {
         }
     }
 
-    public Account getAccount(Card card) {
+    public Optional<Account> getAccount(Card card) {
         return accounts.stream()
                 .filter(account -> account.getCard().equals(card))
-                .findFirst()
-                .orElseThrow(NoSuchElementException::new);
+                .findFirst();
     }
 }

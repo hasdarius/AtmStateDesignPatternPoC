@@ -32,8 +32,15 @@ public class Account {
         return balance;
     }
 
-    public void setBalance(AtomicInteger balance) {
-        this.balance = balance;
+    /**
+     *
+     * @param amount
+     * Method used for both adding to account balance or removing from it. Implemented in a thread safe way.
+     */
+    public synchronized void addToOrRemoveFromAccountBalance(Integer amount) {
+        if (balance.get() + amount > 0) {
+            balance.addAndGet(amount);
+        }
     }
 
     public String getAccountNumber() {

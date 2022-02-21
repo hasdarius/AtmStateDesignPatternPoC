@@ -9,18 +9,20 @@ import com.designPatterns.sate.concreteStates.TransactionCompleteState;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Atm {
-    Bank bank;
-    AtmState state;
-    AtmState idleState;
-    AtmState cardInsertedState;
-    AtmState pinInsertedState;
-    AtmState transactionCompleteState;
+    private final Bank bank;
+    private Account authenticatedAccount = null;
+    private Card introducedCard = null;
+    private AtmState state;
+    private final AtmState idleState;
+    private final AtmState cardInsertedState;
+    private final AtmState pinInsertedState;
+    private final AtmState transactionCompleteState;
 
-    private AtomicInteger moneyAmount;
+    private Integer atmBalance;
 
     public Atm(Integer moneyAmount) {
         bank = Bank.getInstance();
-        this.moneyAmount = new AtomicInteger(moneyAmount);
+        this.atmBalance = moneyAmount;
         idleState = new IdleState(this);
         cardInsertedState = new CardInsertedState(this);
         pinInsertedState = new PinInsertedState(this);
@@ -28,8 +30,12 @@ public class Atm {
         state = idleState;
     }
 
-    private void refillAtm(Integer moneyAmount){
-        this.moneyAmount.addAndGet(moneyAmount);
+    public void addToAtmBalance(Integer moneyAmount) {
+        atmBalance = atmBalance + moneyAmount;
+    }
+
+    public void removeFromAtmBalance(Integer moneyAmount) {
+        atmBalance = atmBalance - moneyAmount;
     }
 
     public AtmState getState() {
@@ -38,6 +44,7 @@ public class Atm {
 
     public void setState(AtmState state) {
         this.state = state;
+        System.out.println("You are now in state " + state.getClass().getName());
     }
 
     public AtmState getIdleState() {
@@ -56,32 +63,67 @@ public class Atm {
         return transactionCompleteState;
     }
 
-    public AtomicInteger getMoneyAmount() {
-        return moneyAmount;
+    public Account getAuthenticatedAccount() {
+        return authenticatedAccount;
     }
-    public void insertCard(Card card){
+
+    public void setAuthenticatedAccount(Account authenticatedAccount) {
+        this.authenticatedAccount = authenticatedAccount;
+    }
+
+    public Bank getBank() {
+        return bank;
+    }
+
+    public Card getIntroducedCard() {
+        return introducedCard;
+    }
+
+    public void setIntroducedCard(Card introducedCard) {
+        this.introducedCard = introducedCard;
+    }
+
+    public Integer getAtmBalance() {
+        return atmBalance;
+    }
+
+    public void insertCard(Card card) {
         state.insertCard(card);
     }
-    public void insertPin(String pin){
+
+    public void insertPin(String pin) {
         state.insertPin(pin);
-    };
-    public void ejectCard(Card card){
-        state.ejectCard(card);
-    };
-    public void changePin(String oldPin, String newPin){
+    }
+
+
+    public void ejectCard(Card card) {
+        state.ejectCard(card, this);
+    }
+
+
+    public void changePin(String oldPin, String newPin) {
         state.changePin(oldPin, newPin);
-    };
-    public void checkAccountBalance(){
+    }
+
+
+    public void checkAccountBalance() {
         state.checkAccountBalance();
-    };
-    public void withdrawMoney(Integer amount){
+    }
+
+
+    public void withdrawMoney(Integer amount) {
         state.withdrawMoney(amount);
-    };
-    public void insertMoney(Integer amount){
+    }
+
+
+    public void insertMoney(Integer amount) {
         state.insertMoney(amount);
-    };
-    public void performAnotherTransaction(Boolean option){
+    }
+
+
+    public void performAnotherTransaction(Boolean option) {
         state.performAnotherTransaction(option);
 
-    };
+    }
+
 }
