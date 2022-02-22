@@ -49,7 +49,7 @@ public record CardInsertedState(Atm atm) implements AtmState {
     }
 
     @Override
-    public void insertMoney(Integer amount) {
+    public void depositMoney(Integer amount) {
         System.out.println("Not authenticated. Cannot insert money.");
 
     }

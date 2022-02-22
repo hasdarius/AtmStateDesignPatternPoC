@@ -14,7 +14,7 @@ public interface AtmState {
 
     void withdrawMoney(Integer amount);
 
-    void insertMoney(Integer amount);
+    void depositMoney(Integer amount);
 
     void performAnotherTransaction(Boolean option);
 

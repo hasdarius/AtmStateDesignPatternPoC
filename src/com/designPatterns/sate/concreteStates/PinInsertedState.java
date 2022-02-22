@@ -55,7 +55,7 @@ public record PinInsertedState(Atm atm) implements AtmState {
     }
 
     @Override
-    public void insertMoney(Integer amount) {
+    public void depositMoney(Integer amount) {
         System.out.println("Money received. Perfoming transaction...");
         atm.getAuthenticatedAccount().addToOrRemoveFromAccountBalance(amount);
         atm.addToAtmBalance(amount);

@@ -43,7 +43,7 @@ public record IdleState(Atm atm) implements AtmState {
     }
 
     @Override
-    public void insertMoney(Integer amount) {
+    public void depositMoney(Integer amount) {
         System.out.println("Card not inserted. Cannot insert money.");
 
     }

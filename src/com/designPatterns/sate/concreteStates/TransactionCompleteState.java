@@ -33,7 +33,7 @@ public record TransactionCompleteState(Atm atm) implements AtmState {
     }
 
     @Override
-    public void insertMoney(Integer amount) {
+    public void depositMoney(Integer amount) {
         System.out.println("Another transaction was just completed. Please select 'Perform another transaction' option if you wish to perform this task...");
 
     }

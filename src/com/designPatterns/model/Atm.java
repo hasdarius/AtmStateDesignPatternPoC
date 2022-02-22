@@ -6,8 +6,6 @@ import com.designPatterns.sate.concreteStates.IdleState;
 import com.designPatterns.sate.concreteStates.PinInsertedState;
 import com.designPatterns.sate.concreteStates.TransactionCompleteState;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 public class Atm {
     private final Bank bank;
     private Account authenticatedAccount = null;
@@ -116,8 +114,8 @@ public class Atm {
     }
 
 
-    public void insertMoney(Integer amount) {
-        state.insertMoney(amount);
+    public void depositMoney(Integer amount) {
+        state.depositMoney(amount);
     }
 
 
