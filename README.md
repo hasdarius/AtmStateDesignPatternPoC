@@ -5,4 +5,4 @@ A possible implementation of an ATM system based on State Design Pattern. Bank i
 
 State transition diagram presenteed below:
 
-![Alt text](AtmStateTransitionDiagram.png?raw=true "StateTransitionDiagram")
+![Alt text](https://github.com/hasdarius/AtmStateDesignPatternPoC/blob/master/AtmStateTransitionDiagram.png?raw=true "StateTransitionDiagram")
