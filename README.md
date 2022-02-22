@@ -1,5 +1,5 @@
 # AtmStateDesignPatternPoC
-Proof Of Concept for State Design Pattern after reading the Head First Design Patterns Book.
+Proof Of Concept for State Design Pattern after reading the Head First Design Patterns Book implemented in Java 17.
 
 A possible implementation of an ATM system based on State Design Pattern. Bank implemented using Singleton Pattern in a thread safe way using private static final Holder class.
 
